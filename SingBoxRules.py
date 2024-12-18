@@ -83,7 +83,7 @@ def merge_json():
     num = 0
     for proxy_type in rulesets:
         if proxy_type not in rules["rules"][0]:
-            rules["rules"][0][proxy_type] = dict()
+            rules["rules"][0] = dict()
         for rule_type in rulesets[proxy_type]:
             for remote_rule in rulesets[proxy_type][rule_type]:
                 url = base_url + rule_type + "/" + remote_rule + ".json"
@@ -93,13 +93,13 @@ def merge_json():
                     for r in rule:
                         if not isinstance(rule[r], list):
                             continue
-                        if r not in rules["rules"][0][proxy_type]:
-                            rules["rules"][0][proxy_type][r] = set()
-                        rules["rules"][0][proxy_type][r] = rules["rules"][0][proxy_type][r] | set(rule[r])
+                        if r not in rules["rules"][0]:
+                            rules["rules"][0][r] = set()
+                        rules["rules"][0][r] = rules["rules"][0][r] | set(rule[r])
                     num = num + 1
                     print("progress: {}/{} | {}:{}\n".format(num, sum, proxy_type, rule_type))
-        for r in rules["rules"][0][proxy_type]:
-            rules["rules"][0][proxy_type][r] = sorted(list(rules["rules"][0][proxy_type][r]))
+        for r in rules["rules"][0]:
+            rules["rules"][0][r] = sorted(list(rules["rules"][0][r]))
         with open(proxy_type + ".json", 'w', encoding='utf-8') as local_file:
             json_str = json.dumps(rules, ensure_ascii=False, indent=4, separators=(',', ':'))
             print('try to write local file')
