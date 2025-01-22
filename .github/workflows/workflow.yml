@@ -1,4 +1,4 @@
-# timestamp: 2025/01/21 08:38:59 UTC
+# timestamp: 2025/01/22 08:32:21 UTC
 
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
@@ -7,7 +7,7 @@ name: Workflow
 
 on:
   schedule:
-    - cron: '15 8 * * *'
+    - cron: '5 6 * * *'
   workflow_dispatch:
 
 jobs:
